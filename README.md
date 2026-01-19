@@ -1,23 +1,25 @@
 # LocaleLens React Demo
 
-Minimal React i18n demo using [LocaleLens](https://localelens.ai) with a small server proxy to keep API keys secure.
-
-This example intentionally avoids react-i18next to demonstrate how LocaleLens can replace file-based i18n entirely.
+Minimal React i18n demo using [LocaleLens](https://localelens.ai) with a secure server proxy.
 
 ## What this demo shows
 
-- Client-side React app (no SSR, no framework-specific i18n)
-- Fetching translations from LocaleLens API at runtime
+- Fetching translations from the LocaleLens API at runtime
+- No file-based i18n and no i18n framework
+- Flat key-value translation format
+- Language switching with instant UI updates
 - Secure API key handling via server proxy
-- Simple `useTranslations` hook built on top of fetch, without any i18n framework
-- Language switching with live translation updates
+- Simple `useTranslations` hook
+- Client-side state for locale selection
 
 ## How it works
+
+This demo uses a simple request-time translation fetch flow:
 
 ```
 ┌─────────────┐      ┌─────────────┐      ┌─────────────┐
 │   Browser   │ ──── │   Server    │ ──── │  LocaleLens │
-│  (React)    │      │   (Hono)    │      │     API     │
+│   (React)   │      │   (Hono)    │      │     API     │
 └─────────────┘      └─────────────┘      └─────────────┘
        │                    │                    │
        │ GET /api/          │                    │
@@ -32,17 +34,18 @@ This example intentionally avoids react-i18next to demonstrate how LocaleLens ca
 ```
 
 1. React app requests translations for a locale
-2. Server adds `Authorization` header with API key
+2. Server injects `Authorization` header with API key
 3. LocaleLens returns flat key-value JSON
 4. React renders translations via `t('key')` helper
 
 ## Why there is a server
 
-The API key must never be exposed to the browser. The server acts as a secure proxy:
+The browser must never see the API key. The server proxy:
 
 - Injects `Authorization: Bearer ${API_KEY}` on every request
 - Adds caching headers for performance
 - Mirrors production deployment patterns
+- Works with any host (Vercel, Fly, Node, Bun)
 
 The server in this demo is a small [Hono](https://hono.dev) app, but any backend (Express, Fastify, Cloudflare Workers, etc.) would work the same.
 
@@ -62,20 +65,20 @@ cp .env.example .env.local
 npm install
 ```
 
-3. Start development server:
+3. Start the dev server:
 
 ```bash
 npm run dev
 ```
 
-This runs both the Hono server (port 3000) and Vite dev server (port 5173) concurrently. The Vite dev server proxies `/api` requests to the Hono server.
+This runs both the Hono server (port 3000) and Vite dev server (port 5173). Vite proxies `/api` requests to the Hono server.
 
 ## Key takeaways
 
-- **No build-time i18n** — translations load at runtime from LocaleLens
-- **No JSON files** — LocaleLens is your single source of truth
-- **No framework lock-in** — just `fetch` and `useState`
-- **Secure by default** — API key stays on the server
+- **No build-time i18n** — translations load at runtime
+- **No JSON files** — LocaleLens is the source of truth
+- **No framework lock-in** — just `fetch()`
+- **Secure by default** — API keys never reach the browser
 
 ## Translation keys used in this demo
 
@@ -105,3 +108,7 @@ Copy this JSON and import it into your LocaleLens project:
   }
 }
 ```
+
+---
+
+Learn more at https://localelens.ai
