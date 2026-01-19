@@ -111,4 +111,5 @@ Copy this JSON and import it into your LocaleLens project:
 
 ---
 
-Learn more at https://localelens.ai
+🔗 Learn more at https://localelens.ai  
+📚 Documentation: https://localelens.ai/docs
