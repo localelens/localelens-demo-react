@@ -4,12 +4,23 @@ import { LanguageSwitcher } from './components/LanguageSwitcher'
 
 export function App() {
   const [locale, setLocale] = useState('en')
-  const t = useTranslations(locale)
+  const { t, isLoading, error } = useTranslations(locale)
+
+  if (error) {
+    return (
+      <div className="container">
+        <p className="error">Failed to load translations: {error.message}</p>
+      </div>
+    )
+  }
 
   return (
     <div className="container">
       <header>
-        <LanguageSwitcher locale={locale} onChange={setLocale} />
+        <div className="locale-controls">
+          {isLoading && <span className="spinner" />}
+          <LanguageSwitcher locale={locale} onChange={setLocale} />
+        </div>
       </header>
 
       <h1>{t('home.title')}</h1>
