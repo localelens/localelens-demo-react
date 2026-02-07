@@ -2,6 +2,8 @@
 
 Minimal React i18n demo using [LocaleLens](https://localelens.ai) with a secure server proxy.
 
+> **Looking for a full-featured example?** See the [TanStack Start demo](https://github.com/localelens/localelens-demo-tanstack-start) for SSR, authentication, and protected routes.
+
 ## What this demo shows
 
 - Fetching translations from the LocaleLens API at runtime
@@ -80,34 +82,13 @@ This runs both the Hono server (port 3000) and Vite dev server (port 5173). Vite
 - **No framework lock-in** — just `fetch()`
 - **Secure by default** — API keys never reach the browser
 
-## Translation keys used in this demo
+## Optional: Import Demo Translations
 
-Copy this JSON and import it into your LocaleLens project:
+This repository includes [`docs/localelens-demo-translations.json`](docs/localelens-demo-translations.json) which can be imported into a new LocaleLens project to instantly populate all demo translations.
 
-```json
-{
-  "en": {
-    "home.title": "Welcome",
-    "home.description": "This demo shows how LocaleLens replaces file-based i18n with a simple API fetch.",
-    "home.how_it_works": "How it works",
-    "home.step_1": "Translations are fetched from LocaleLens at runtime",
-    "home.step_2": "The server proxies requests and caches responses for 60 seconds",
-    "home.step_3": "No JSON files, no framework, just fetch()",
-    "home.missing_key_title": "Missing key fallback",
-    "home.missing_key_description": "When a key doesn't exist, the key itself is returned:"
-  },
-  "de": {
-    "home.title": "Willkommen",
-    "home.description": "Diese Demo zeigt, wie LocaleLens dateibasiertes i18n durch einen einfachen API-Aufruf ersetzt.",
-    "home.how_it_works": "So funktioniert es",
-    "home.step_1": "Übersetzungen werden zur Laufzeit von LocaleLens abgerufen",
-    "home.step_2": "Der Server leitet Anfragen weiter und cached die Antworten für 60 Sekunden",
-    "home.step_3": "Keine JSON-Dateien, kein Framework – einfach fetch()",
-    "home.missing_key_title": "Fehlender Schlüssel",
-    "home.missing_key_description": "Wenn ein Key nicht existiert, wird der Key selbst zurückgegeben:"
-  }
-}
-```
+📄 [View translations](docs/localelens-demo-translations.json) · 📥 [Download](https://raw.githubusercontent.com/localelens/localelens-demo-react/main/docs/localelens-demo-translations.json) (right-click → Save As)
+
+This file exists **only to make the demo easy to reproduce**. The app itself fetches translations from LocaleLens at runtime — it does **not** read from this JSON file.
 
 ---
 
