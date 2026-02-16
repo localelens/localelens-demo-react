@@ -1,6 +1,6 @@
 # LocaleLens React Demo
 
-Minimal React i18n demo using [LocaleLens](https://localelens.ai) with a secure server proxy.
+Minimal React i18n demo using [LocaleLens](https://localelens.ai) with a secure server proxy. LocaleLens is translation infrastructure for developers — update translations in production without redeploying.
 
 > **Looking for a full-featured example?** See the [TanStack Start demo](https://github.com/localelens/localelens-demo-tanstack-start) for SSR, authentication, and protected routes.
 
